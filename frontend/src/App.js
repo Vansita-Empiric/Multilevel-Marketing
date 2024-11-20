@@ -21,7 +21,7 @@ function App() {
 
   useEffect(() => {
     const connectWallet = async () => {
-      const contractAddress = "0xE7C2a73131dd48D8AC46dCD7Ab80C8cbeE5b410A";
+      const contractAddress = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
       const contractABI = abi.abi;
 
       try {
@@ -65,12 +65,23 @@ function App() {
           path="/login"
           element={<Login state={state} account={account} />}
         />
-        <Route path="/purchase" element={<Purchase state={state} account={account} />} />
-        <Route path="/userInfo" element={<UserInfo state={state} account={account} />} />
-        <Route path="/codeInfo" element={<CodeInfo state={state} account={account} />} />
+        <Route
+          path="/purchase"
+          element={<Purchase state={state} account={account} />}
+        />
+        <Route
+          path="/userInfo"
+          element={<UserInfo state={state} account={account} />}
+        />
+        <Route
+          path="/codeInfo"
+          element={<CodeInfo state={state} account={account} />}
+        />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+// 0x5FbDB2315678afecb367f032d93F642f64180aa3

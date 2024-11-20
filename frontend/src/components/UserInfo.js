@@ -17,6 +17,8 @@ const UserInfo = ({ state, account }) => {
   const searchUserDetailsFn = async (e) => {
     e.preventDefault();
     try {
+      console.log("address--------------", addr);
+      
       const userDetails = await contract.getUserDetails(addr);
 
       setDetails({

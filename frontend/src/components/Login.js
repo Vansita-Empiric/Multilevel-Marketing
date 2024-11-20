@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowLeft } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -7,6 +7,18 @@ const Login = ({ state, account }) => {
   const { contract } = state;
   const navigate = useNavigate();
   const [name, setName] = useState();
+
+  // useEffect(async() => {
+    
+  // const userDetails = await contract.getUserDetails(account);
+  // console.log("Registered User Details: ", userDetails);
+
+  // const referralLink = `${window.location.origin}/register?ref=${userDetails.referralCode}`;
+  // console.log("Referral Link: ", referralLink);
+  
+
+  // }, [])
+  
 
   const loginUserFn = async (e) => {
     e.preventDefault();

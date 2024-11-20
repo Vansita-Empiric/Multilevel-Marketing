@@ -34,15 +34,17 @@ contract UserContract {
     // user4: 0x617F2E2fD72FD9D5503197092aC168c91465E7f2    --
     // user5: 0x17F6AD8Ef982297579C203069C1DbfFE4348c372    --
 
-    modifier loggedInOnly {
-        require(isLoggedIn[msg.sender], "You have to Login to access this function");
+    modifier loggedInOnly() {
+        require(
+            isLoggedIn[msg.sender],
+            "You have to Login to access this function"
+        );
         _;
     }
 
-    function registerUser(
-        string memory _username,
-        bytes4 _receivedReferralCode
-    ) public {
+    function registerUser(string memory _username, bytes4 _receivedReferralCode)
+        public
+    {
         require(msg.sender != owner, "Owner can not register");
         require(
             !isRegistered[msg.sender],
@@ -54,11 +56,7 @@ contract UserContract {
 
         bytes4 refCode = bytes4(
             keccak256(
-                abi.encodePacked(
-                    msg.sender,
-                    referralCodeFrom,
-                    block.timestamp
-                )
+                abi.encodePacked(msg.sender, referralCodeFrom, block.timestamp)
             )
         );
 
@@ -87,7 +85,10 @@ contract UserContract {
                 keccak256(abi.encodePacked(_username)),
             "Invalid username for this account"
         );
-        require(!isLoggedIn[msg.sender], "You are already Llogged In with this account");
+        require(
+            !isLoggedIn[msg.sender],
+            "You are already Llogged In with this account"
+        );
 
         isLoggedIn[msg.sender] = true;
     }
@@ -117,11 +118,28 @@ contract UserContract {
         }
     }
 
-    function getUserDetails(address _userAdd) public view loggedInOnly returns(User memory) {
+    function isReferralCodeValid(bytes4 _refCode) public view returns (bool) {
+        address userAddress = referrerAdd[_refCode];
+        if (userAddress != address(0)) {
+            return true;
+        }
+        return false;
+    }
+
+    function getUserDetails(address _userAdd)
+        public
+        view
+        returns (User memory)
+    {
         return userDetails[_userAdd];
     }
 
-    function getReferralCodeUsedByInfo(bytes4 _referralCode) public view loggedInOnly returns(address[] memory) {
+    function getReferralCodeUsedByInfo(bytes4 _referralCode)
+        public
+        view
+        loggedInOnly
+        returns (address[] memory)
+    {
         return referralCodeUsedBy[_referralCode];
     }
 }
