@@ -11,7 +11,7 @@ const Register = ({ state, account }) => {
   const [refCode, setRefCode] = useState("0x00000000");
 
   useEffect(() => {
-    const refCode = searchParams.get("ref");
+    const refCode = searchParams.get("refcode");
     console.log("refCode--------------", refCode);
 
     if (refCode) {
@@ -82,6 +82,7 @@ const Register = ({ state, account }) => {
       console.log("logout error: ", error);
       toast.error(error.reason);
     }
+    
   };
   return (
     <div className="flex justify-center min-h-screen bg-gray-800 items-center ">

@@ -42,7 +42,7 @@ function App() {
           const signer = await provider.getSigner();
           const contract = new Contract(contractAddress, contractABI, signer);
 
-          setAccount(account?.[0]);
+          setAccount(account[0]);
           setState({ provider, signer, contract });
         } else {
           alert("Install Metamask");
